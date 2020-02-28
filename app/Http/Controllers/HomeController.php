@@ -62,6 +62,51 @@ class HomeController extends Controller
         return view('participantes.search', compact('participante'));
 
     }
+    public function post_referir_participante(Request $request){
+        $id_old = $request->input('id_old');
+        $id_new = $request->input('id_new');
+        $lado = $request->input('lado');
+
+        $old_participante =  \App\Participante::find($id_old);
+        if($lado == 1){
+            //va por izq
+            $old_participante->id_usuario_izquierda = $id_new;
+            $old_participante->save();
+
+        }
+        else{
+            $old_participante->id_usuario_derecha = $id_new;
+            $old_participante->save();
+
+        }
+
+        return response()
+            ->json(['code' => 202]);
+
+        
+
+        
+
+
+    }
+
+    public function post_search_participante(Request $request){
+        $participante = \App\Participante::where('identificacion', $request->input('identificacion'))->first();
+        
+        if($participante){
+            return response()
+            ->json(['code' => 202, 'participante' => $participante]);
+
+        }
+        else{
+            return response()
+            ->json(['code' => 404]);
+
+        }
+        
+        
+
+    }
 
         
         

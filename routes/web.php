@@ -23,5 +23,10 @@ Route::get('/participantes', 'HomeController@participantes')->name('participante
 Route::get('/participantes_create', 'HomeController@participantesCreate')->name('participantes_create');
 Route::post('/participante_crear', 'HomeController@postParticipantesCreate')->name('participante_crear');
 Route::get('/participante_search', 'HomeController@participante_search')->name('participante_search');
+Route::get('/post_search_participante', 'HomeController@post_search_participante')->name('post_search_participante');
+Route::post('/post_referir_participante', 'HomeController@post_referir_participante')->name('post_referir_participante');
+
+
+
 
 
