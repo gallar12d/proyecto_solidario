@@ -21,4 +21,17 @@ class Participante extends Model
         return $this->hasOne('App\Participante', 'id', 'id_usuario_derecha');
     }
 
+
+    public function padre_der()
+
+    {
+        return $this->belongsTo('App\Participante', 'id', 'id_usuario_derecha');
+    }
+
+    public function padre_izq()
+
+    {
+        return $this->belongsTo('App\Participante', 'id', 'id_usuario_izquierda');
+    }
+
 }

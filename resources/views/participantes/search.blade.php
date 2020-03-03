@@ -36,7 +36,7 @@
     <div class="col-md-3 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Informacíon del participante</span>
-        
+
       </h4>
       <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -45,47 +45,48 @@
             <small class="text-muted">{{$participante->name}}</small>
             <input type="hidden" value="{{$participante->id}}" id="id_participante">
           </div>
-          
+
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Número de identificación</h6>
             <small id="identificacion_participante" class="text-muted">{{$participante->identificacion}}</small>
           </div>
-          
+
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Telefono 1</h6>
             <small class="text-muted">{{$participante->telefono1}}</small>
           </div>
-          
+
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Telefono 2</h6>
             <small class="text-muted">{{$participante->telefono2}}</small>
-          </div>         
+          </div>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Dirección</h6>
             <small class="text-muted">{{$participante->direccion}}</small>
-          </div>         
+          </div>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0">Fecha de creación</h6>
             <small class="text-muted">{{$participante->created_at}}</small>
-          </div>         
+          </div>
         </li>
       </ul>
 
       <form class="card p-2">
         <div class="input-group">
-          <input data_url = "{{url('/post_search_participante')}}" id="input_search" type="text" class="form-control" placeholder="Idenficación a referir">
+          <input data_url="{{url('/post_search_participante')}}" id="input_search" type="text" class="form-control"
+            placeholder="Idenficación a referir">
           <div class="input-group-append">
-            <button onclick ="search(this)" type="button" class="btn btn-secondary">Buscar</button>
+            <button onclick="search(this)" type="button" class="btn btn-secondary">Buscar</button>
           </div>
         </div>
       </form>
@@ -95,55 +96,229 @@
       $mitad = 6;
       @endphp
 
-      @for ($i = 1; $i <= 3; $i++)
-        
-    
 
-        
-        
-          <div class="row  justify-content-around">
-            <div class="col-md-{{$mitad}}  justify-content-between align-items-center">
-              @if($participante->izq)
-              <strong class=" float-right d-flex justify-content-between align-items-center">{{$participante->izq->name}}</strong>
+      @if(isset($participante->padre_izq) || isset($participante->padre_der))
+
+      @if(isset($participante->padre_izq))
+        @php
+          $padre = $participante->padre_izq;
+          $float = 'float-right';
+        @endphp
+      @else
+        @php
+          $padre = $participante->padre_der;
+          $float = 'float-left';
+        @endphp
+      @endif
+
+
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center ">
+          <p>
+
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+              Padre
+            </button>
+          </p>
+          <div class="collapse {{$float}}" id="collapseExample">
+            
+              <strong class=" ">{{$padre->name}}</strong>
               <br>
-              <span class="float-right">{{$participante->izq->identificacion}}</span>            
-
-              @else
-              <strong>Libre</strong>
-              <span></span>
-              @endif
-                
-            </div>
-            <div class="col-md-{{$mitad}} ">
-
-              @if($participante->der)
-              <strong class="float-left">{{$participante->der->name}}</strong>
+              <img style="width: 50px;"
+                src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+                alt="">
               <br>
-              <span class="float-left">{{$participante->der->identificacion}}</span>            
-
-              @else
-              <strong >Libre</strong>
-              <span></span>
-              @endif
-                
-            </div>
-
+              
+              <span class="">{{$padre->identificacion}}</span>
             
           </div>
-        
+
+        </div>
+      </div>
+      @endif
+
+     
+
+
+      <div class="row  justify-content-center">
+
+        <div class="col-md-12 text-center">
+          <strong class=" ">{{$participante->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->identificacion}}</span>
+
+        </div>
+
+      </div>
+
+      <div class="row  justify-content-center">
+        <div class="col-md-6 text-center">
+          @if(isset($participante->izq))
+          <strong class=" ">{{$participante->izq->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->izq->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+
+        </div>
+        <div class="col-md-6 text-center">
+
+          @if(isset($participante->der))
+          <strong class=" ">{{$participante->der->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->der->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+        </div>
+      </div>
+
+      <div class="row  justify-content-center">
+        <div class="col-md-3 text-center">
           @php
-          $mitad = $mitad / 2;
+          if(isset($participante->izq))
+          $participante_izq = $participante->izq;
+          else
+          $participante_izq = '';
+
+          if(isset($participante->der))
+          $participante_der = $participante->der;
+          else
+          $participante_der = '';
+
+
+          $participante = $participante_izq;
           @endphp
-      @endfor
+          @if(isset($participante->izq))
+          <strong class=" ">{{$participante->izq->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->izq->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+
+        </div>
+        <div class="col-md-3 text-center">
+
+          @if(isset($participante->der))
+          <strong class=" ">{{$participante->der->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->der->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+        </div>
+        @php
+        $participante = $participante_der;
+        @endphp
+        <div class="col-md-3 text-center">
+          @if(isset($participante->izq))
+          <strong class=" ">{{$participante->izq->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->izq->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+
+        </div>
+        <div class="col-md-3 text-center">
+
+          @if(isset($participante->der))
+          <strong class=" ">{{$participante->der->name}}</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class="">{{$participante->der->identificacion}}</span>
+
+          @else
+          <strong class=" ">Libre</strong>
+          <br>
+          <img style="width: 50px;"
+            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+            alt="">
+          <br>
+          <span class=""># identificacion libre</span>
+          @endif
+        </div>
+      </div>
+
+      @php
+      $mitad = $mitad / 2;
+      @endphp
+
 
     </div>
   </div>
 </div>
-<div data_url_referir ="{{url('post_referir_participante')}}"  id="modal_referir" class="modal" tabindex="-1" role="dialog">
+<div data_url_referir="{{url('post_referir_participante')}}" id="modal_referir" class="modal" tabindex="-1"
+  role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5  class="modal-title">INFORMACIÓN DEL PARTICIPANTE</h5>
+        <h5 class="modal-title">INFORMACIÓN DEL PARTICIPANTE</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -154,15 +329,17 @@
       <div style="display: table !important;" class="modal-footer">
         <div class="row">
           <div class="col-md-6 col-sm-6">
-            <button onclick="referir(1)" type="button" class="btn btn-md btn-block btn-outline-primary">Referir por izquierda</button>
+            <button onclick="referir(1)" type="button" class="btn btn-md btn-block btn-outline-primary">Referir por
+              izquierda</button>
           </div>
           <div class="col-md-6 col-sm-6">
-            <button onclick="referir(2)" type="button" class="btn btn-md btn-block btn-outline-primary">Referir por derecha</button>
+            <button onclick="referir(2)" type="button" class="btn btn-md btn-block btn-outline-primary">Referir por
+              derecha</button>
           </div>
 
         </div>
-       
-       
+
+
       </div>
     </div>
   </div>
@@ -178,66 +355,64 @@
 @endif
 @endsection
 @push('scripts')
-    <script defer>
+<script defer>
 
-      function referir(lado){
+  function referir(lado) {
 
-      if(!confirm('Está seguro que desea relizar esta acción?'))
+    if (!confirm('Está seguro que desea relizar esta acción?'))
       return false
-      
-      //1 isq
-      //2 derec
-      let old_participante = $('#id_participante').val();
-      let new_participante = $('#participante_nombre').attr('data_id')
-      let url = $('#modal_referir').attr('data_url_referir'); 
-      
 
-      $.post(url, {"_token": "{{ csrf_token() }}", 'id_old': old_participante, 'id_new': new_participante, 'lado': lado }).done(function(data){
-        if(data.code == 202 ){
-          alert('Se ha referido existosamente');
-          location.reload();
+    //1 isq
+    //2 derec
+    let old_participante = $('#id_participante').val();
+    let new_participante = $('#participante_nombre').attr('data_id')
+    let url = $('#modal_referir').attr('data_url_referir');
 
-        }
-      })
+
+    $.post(url, { "_token": "{{ csrf_token() }}", 'id_old': old_participante, 'id_new': new_participante, 'lado': lado }).done(function (data) {
+      if (data.code == 202) {
+        alert('Se ha referido existosamente');
+        location.reload();
 
       }
+    })
+
+  }
 
 
-      function search(e){
-        
-        let identificacion = $('#input_search').val();
-        let old_identificacion = $('#identificacion_participante').text();
-        if(identificacion == old_identificacion){
-          alert('No se puede referir a este mismo participante');
-          return false;
-        }
-        if(!identificacion)
-        {
-          alert('No ha ingresado un número de identificación');
-          return false;
-        }
+  function search(e) {
 
-        let url = $('#input_search').attr('data_url');
-        $.get(url, {'identificacion': identificacion}).done(function(data){
-          console.log(data)
-          if(data.code == 202){
-            //abrir modal
-            $('#participante_nombre').text(data.participante.name + ' '+data.participante.identificacion)
-            $('#participante_nombre').attr('data_id', data.participante.id)
-            $('#modal_referir').modal({backdrop: 'static', keyboard: false})  
-            $('#modal_referir').modal('show');
+    let identificacion = $('#input_search').val();
+    let old_identificacion = $('#identificacion_participante').text();
+    if (identificacion == old_identificacion) {
+      alert('No se puede referir a este mismo participante');
+      return false;
+    }
+    if (!identificacion) {
+      alert('No ha ingresado un número de identificación');
+      return false;
+    }
+
+    let url = $('#input_search').attr('data_url');
+    $.get(url, { 'identificacion': identificacion }).done(function (data) {
+      console.log(data)
+      if (data.code == 202) {
+        //abrir modal
+        $('#participante_nombre').text(data.participante.name + ' ' + data.participante.identificacion)
+        $('#participante_nombre').attr('data_id', data.participante.id)
+        $('#modal_referir').modal({ backdrop: 'static', keyboard: false })
+        $('#modal_referir').modal('show');
 
 
-          }
-          else
-          alert('No se ha encontrado a un participante con este número de identificación')
-        })
       }
-  
+      else
+        alert('No se ha encontrado a un participante con este número de identificación')
+    })
+  }
 
-      $(document).ready(function(){
-        
-      })
-    </script>
+
+  $(document).ready(function () {
+
+  })
+</script>
 @endpush
-
