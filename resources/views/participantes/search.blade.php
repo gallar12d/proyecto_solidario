@@ -32,54 +32,63 @@
 
 
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-3 order-md-2 mb-4">
+  <div class="row ">
+    <div class="col-md-12  mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Informacíon del participante</span>
 
       </h4>
-      <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Nombre</h6>
-            <small class="text-muted">{{$participante->name}}</small>
-            <input type="hidden" value="{{$participante->id}}" id="id_participante">
-          </div>
+      <div class="row">
+        <ul class="list-group col-md-6 mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Nombre</h6>
+              <small class="text-muted">{{$participante->name}}</small>
+              <input type="hidden" value="{{$participante->id}}" id="id_participante">
+            </div>
+  
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Número de identificación</h6>
+              <small id="identificacion_participante" class="text-muted">{{$participante->identificacion}}</small>
+            </div>
+  
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Telefono 1</h6>
+              <small class="text-muted">{{$participante->telefono1}}</small>
+            </div>
+  
+          </li>
+         
+        </ul>
+        <ul class="list-group col-md-6 mb-3">
+          
+            
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Telefono 2</h6>
+              <small class="text-muted">{{$participante->telefono2}}</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Dirección</h6>
+              <small class="text-muted">{{$participante->direccion}}</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Fecha de creación</h6>
+              <small class="text-muted">{{$participante->created_at}}</small>
+            </div>
+          </li>
+        </ul>
 
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Número de identificación</h6>
-            <small id="identificacion_participante" class="text-muted">{{$participante->identificacion}}</small>
-          </div>
-
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Telefono 1</h6>
-            <small class="text-muted">{{$participante->telefono1}}</small>
-          </div>
-
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Telefono 2</h6>
-            <small class="text-muted">{{$participante->telefono2}}</small>
-          </div>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Dirección</h6>
-            <small class="text-muted">{{$participante->direccion}}</small>
-          </div>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Fecha de creación</h6>
-            <small class="text-muted">{{$participante->created_at}}</small>
-          </div>
-        </li>
-      </ul>
+      </div>
+      
 
       <form class="card p-2">
         <div class="input-group">
@@ -91,7 +100,8 @@
         </div>
       </form>
     </div>
-    <div class="col-md-9 order-md-2 mb-4">
+   
+    <div class="col-md-12 order-md-2 mb-4">
       @php
       $mitad = 6;
       @endphp
@@ -165,7 +175,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->izq->identificacion}}</span>
+                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -187,7 +198,9 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->der->identificacion}}</span>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -224,7 +237,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->izq->identificacion}}</span>
+                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -246,7 +260,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->der->identificacion}}</span>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -269,7 +284,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->izq->identificacion}}</span>
+                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -291,7 +307,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <span class="">{{$participante->der->identificacion}}</span>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+
 
           @else
           <strong class=" ">Libre</strong>
@@ -305,10 +322,7 @@
         </div>
       </div>
 
-      @php
-      $mitad = $mitad / 2;
-      @endphp
-
+     
 
     </div>
   </div>
