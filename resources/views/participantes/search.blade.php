@@ -12,12 +12,35 @@
           </div>
           <!--end of col-->
           <div class="col">
-            <input name="identificacion" class="form-control form-control-lg form-control-borderless" type="search"
-              placeholder="Ingrese número de identificación">
+            <input name="identificacion" class="form-control form-control-lg form-control-borderless" type="number"
+              placeholder="Buscar por número de identificación">
           </div>
           <!--end of col-->
           <div class="col-auto">
-            <button class="btn btn-lg btn-success" type="submit">Buscar</button>
+            <button  class="btn btn-lg btn-success" type="submit">Buscar</button>
+          </div>
+          <!--end of col-->
+        </div>
+      </form>
+    </div>
+    <!--end of col-->
+  </div>
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form autocomplete="off" class="card card-sm" method="get" action="{{url('/participante_search')}}">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <!--end of col-->
+          <div class="col">
+            <input id="nombres" name="nombres" class="form-control form-control-lg form-control-borderless" type="search"
+              placeholder="Buscar por nombres">
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button id = "search_name" data_url="{{url('/participante_search_name')}}" class="btn btn-lg btn-success" type="button">Buscar</button>
           </div>
           <!--end of col-->
         </div>
@@ -26,7 +49,24 @@
     <!--end of col-->
   </div>
 </div>
-
+<div class="modal" id="modal_busqueda" tabindex="-1" role="dialog">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Participantes encontrados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
 @if($participante)
 <hr>
 
@@ -151,9 +191,7 @@
 
             <strong class=" ">{{$padre->name}}</strong>
             <br>
-            <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+            <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
             <br>
 
             <a href="/participante_search?identificacion={{$padre->identificacion}}"><span
@@ -174,9 +212,7 @@
         <div class="col-md-12 text-center">
           <strong class=" ">{{$participante->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class="">{{$participante->identificacion}}</span>
 
@@ -189,9 +225,7 @@
           @if(isset($participante->izq))
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
@@ -200,9 +234,7 @@
           @else
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -213,9 +245,7 @@
           @if(isset($participante->der))
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
@@ -225,9 +255,7 @@
           @else
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -251,22 +279,26 @@
           $participante = $participante_izq;
           @endphp
           @if(isset($participante->izq))
+          @php
+          $p1 = $participante->izq;
+
+          @endphp
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
 
 
           @else
+          @php
+          $p1 = '';
+
+          @endphp
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -275,22 +307,26 @@
         <div class="col-md-3 text-center">
 
           @if(isset($participante->der))
+          @php
+          $p2 = $participante->der;
+
+          @endphp
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
 
 
           @else
+          @php
+          $p2 = '';
+
+          @endphp
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -300,22 +336,26 @@
         @endphp
         <div class="col-md-3 text-center">
           @if(isset($participante->izq))
+          @php
+          $p3 = $participante->der;
+
+          @endphp
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
 
 
           @else
+          @php
+          $p3 = '';
+
+          @endphp
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -324,45 +364,50 @@
         <div class="col-md-3 text-center">
 
           @if(isset($participante->der))
+          @php
+          $p4 = $participante->der;
+
+          @endphp
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
 
 
           @else
+          @php
+          $p4 = '';
+
+          @endphp
           <strong class=" ">Libre</strong>
           <br>
-          <img style="width: 50px;"
-              src="{{url('/img/user.png')}}"
-              alt="">
+          <img style="width: 50px;" src="{{url('/img/user.png')}}" alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
         </div>
-        
-       
-        @php
-        
-        @endphp
+
+
+
         <div class="row espacio">
 
-
+          @php
+          $participante = $p1;
+          @endphp
           <div class="col-md-2 text-center">
 
-            @if(isset($participante->der))
-            <strong class=" ">{{$participante->der->name}}</strong>
+
+            @if(isset($participante->izq))
+            <strong class=" ">{{$participante->izq->name}}</strong>
             <br>
             <img style="width: 50px;"
               src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
               alt="">
             <br>
-            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
-                class="">{{$participante->der->identificacion}}</span></a>
+            <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+                class="">{{$participante->izq->identificacion}}</span></a>
 
 
             @else
@@ -398,17 +443,24 @@
             <span class=""># identificacion libre</span>
             @endif
           </div>
+
+          <!-- participante 2 -->
+
+          @php
+          $participante = $p2;
+          @endphp
           <div class="col-md-2 text-center">
 
-            @if(isset($participante->der))
-            <strong class=" ">{{$participante->der->name}}</strong>
+
+            @if(isset($participante->izq))
+            <strong class=" ">{{$participante->izq->name}}</strong>
             <br>
             <img style="width: 50px;"
               src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
               alt="">
             <br>
-            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
-                class="">{{$participante->der->identificacion}}</span></a>
+            <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+                class="">{{$participante->izq->identificacion}}</span></a>
 
 
             @else
@@ -444,17 +496,23 @@
             <span class=""># identificacion libre</span>
             @endif
           </div>
+
+          <!-- participante 3 -->
+          @php
+          $participante = $p3;
+          @endphp
           <div class="col-md-2 text-center">
 
-            @if(isset($participante->der))
-            <strong class=" ">{{$participante->der->name}}</strong>
+
+            @if(isset($participante->izq))
+            <strong class=" ">{{$participante->izq->name}}</strong>
             <br>
             <img style="width: 50px;"
               src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
               alt="">
             <br>
-            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
-                class="">{{$participante->der->identificacion}}</span></a>
+            <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+                class="">{{$participante->izq->identificacion}}</span></a>
 
 
             @else
@@ -490,17 +548,22 @@
             <span class=""># identificacion libre</span>
             @endif
           </div>
+          <!-- participante 4 -->
+          @php
+          $participante = $p4;
+          @endphp
           <div class="col-md-2 text-center">
 
-            @if(isset($participante->der))
-            <strong class=" ">{{$participante->der->name}}</strong>
+
+            @if(isset($participante->izq))
+            <strong class=" ">{{$participante->izq->name}}</strong>
             <br>
             <img style="width: 50px;"
               src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
               alt="">
             <br>
-            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
-                class="">{{$participante->der->identificacion}}</span></a>
+            <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+                class="">{{$participante->izq->identificacion}}</span></a>
 
 
             @else
@@ -536,6 +599,7 @@
             <span class=""># identificacion libre</span>
             @endif
           </div>
+
         </div>
 
 
@@ -578,6 +642,7 @@
     </div>
   </div>
 </div>
+
 @else
 <hr>
 <div class="row justify-content-center">
@@ -658,6 +723,31 @@
       })
 
     })
+    $('#search_name').on('click', function (e) {
+      e.preventDefault();
+      var url = $(this).attr('data_url');
+      var valor = $('#nombres').val();
+
+      $.get(url, { "_token": "{{ csrf_token() }}", 'valor': valor }).done(function (data) {
+        
+        //location.reload();
+        if(data.participantes.length){
+          text = '<div class="row">'
+          $.each(data.participantes, function(k,v){
+            text = text + '<div class="col-md-6">' + v.name + '->'+v.identificacion+'</div>';
+            text = text + '<div class="col-md-6"><a href="/participante_search?identificacion='+v.identificacion+'">Mostrar</a></div>';
+
+          })
+          console.log(text)
+
+          $('#modal_busqueda .modal-body').html(text);
+          $('#modal_busqueda').modal('show')
+        }
+      })
+
+    })
+
+    
 
   })
 </script>

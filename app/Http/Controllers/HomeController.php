@@ -65,6 +65,15 @@ class HomeController extends Controller
             return redirect()->route('participantes_create');
         }
     }
+    public function participante_search_name(Request $request){
+
+        $participantes = \App\Participante::where('name', 'LIKE', '%'.strtoupper($request->valor).'%')->get();
+        return response()
+            ->json(['participantes' => $participantes]);
+
+
+
+    }
 
     public function participante_search(Request $request){
 
