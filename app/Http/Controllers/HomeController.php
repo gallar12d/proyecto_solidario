@@ -33,6 +33,15 @@ class HomeController extends Controller
     {
         return view('participantes.create');
     }
+    public function participante_update_date(Request $request){
+        $id = $request->id;
+        $participante = \App\Participante::find($id);
+        $participante->fecha_ingreso = $request->fecha_ingreso;
+        $suma = date('Y-m-d', strtotime($request->fecha_ingreso. ' + 8 days'));
+        $participante->fecha_pago = $suma; 
+        $participante->save();
+
+    }
 
     public function postParticipantesCreate(Request $request){
 
@@ -45,6 +54,14 @@ class HomeController extends Controller
             echo '<h3>El participante con identificacion: '.$request->input('identificacion').' ya existe en el sistema!</h3>';
         } else {
             $flight = \App\Participante::create($request->all());
+
+            $id = $flight->id;
+            $participante = \App\Participante::find($id);
+            $participante->name = trim(strtoupper($participante->name));
+            $participante->fecha_ingreso = date('Y-m-d');
+            $suma = date('Y-m-d', strtotime(date('Y-m-d'). ' + 8 days'));
+            $participante->fecha_pago = $suma; 
+            $participante->save();
             return redirect()->route('participantes_create');
         }
     }

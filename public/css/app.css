@@ -10888,4 +10888,14 @@ a.text-dark:focus {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+@media (min-width: 768px){
+.col-md-2 {
+    flex: 0 0 12.5% !important;
+    /* max-width: 16.6666666667%; */
+}}
 
+.espacio{
+  margin-top: 40px !important;
+  margin-right: -90px;
+  margin-left: -90px;
+}

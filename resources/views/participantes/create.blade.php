@@ -13,7 +13,7 @@
         
         <div class="col-md-10 order-md-1">
           <h4 class="mb-3">Formulario de creación de participantes</h4>
-          <form  method ="post" action = "{{url('participante_crear')}}" class="needs-validation" >
+          <form  autocomplete="off" method ="post" action = "{{url('participante_crear')}}" class="needs-validation" >
             @csrf
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -25,14 +25,14 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="firstName">Número de identificación (obligatorio)</label>
-                <input  name ="identificacion" type="text" class="form-control" id="identificacion" placeholder="" value="" required>
+                <input  name ="identificacion" type="number" class="form-control" id="identificacion" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="firstName">Correo electrónico</label>
-                <input  name ="email" type="text" class="form-control" id="email" placeholder="" value="" >
+                <input  name ="email" type="email" class="form-control" id="email" placeholder="" value="" >
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
@@ -46,14 +46,14 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="firstName">Teléfono 1 (obligatorio)</label>
-                <input  name ="telefono1" type="text" class="form-control" id="telefono1" placeholder="" value="" required>
+                <input  name ="telefono1" type="number" class="form-control" id="telefono1" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="firstName">Teléfono 2</label>
-                <input  name ="telefono2" type="text" class="form-control" id="telefono2" placeholder="" value="" >
+                <input  name ="telefono2" type="number" class="form-control" id="telefono2" placeholder="" value="" >
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>

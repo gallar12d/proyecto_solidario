@@ -5,7 +5,7 @@
   <br />
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
-      <form class="card card-sm" method="get" action="{{url('/participante_search')}}">
+      <form autocomplete="off" class="card card-sm" method="get" action="{{url('/participante_search')}}">
         <div class="card-body row no-gutters align-items-center">
           <div class="col-auto">
             <i class="fas fa-search h4 text-body"></i>
@@ -46,27 +46,34 @@
               <small class="text-muted">{{$participante->name}}</small>
               <input type="hidden" value="{{$participante->id}}" id="id_participante">
             </div>
-  
+
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Número de identificación</h6>
               <small id="identificacion_participante" class="text-muted">{{$participante->identificacion}}</small>
             </div>
-  
+
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Telefono 1</h6>
               <small class="text-muted">{{$participante->telefono1}}</small>
             </div>
-  
+
           </li>
-         
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Telefono 1</h6>
+              <small class="text-muted">{{$participante->email}}</small>
+            </div>
+
+          </li>
+
         </ul>
         <ul class="list-group col-md-6 mb-3">
-          
-            
+
+
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Telefono 2</h6>
@@ -82,15 +89,24 @@
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Fecha de creación</h6>
-              <small class="text-muted">{{$participante->created_at}}</small>
+              <input id="new_date" type="date" value="{{$participante->fecha_ingreso}}">
+              <a id="editar_date" href="{{url('participante_update_date')}}">Modificar</a>
+              <small class="text-muted">{{$participante->fecha_ingreso}}</small>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Fecha de pago</h6>
+              <small class="text-muted">{{$participante->fecha_pago}}</small>
             </div>
           </li>
         </ul>
 
       </div>
-      
 
-      <form class="card p-2">
+
+
+      <form autocomplete="off" class="card p-2">
         <div class="input-group">
           <input data_url="{{url('/post_search_participante')}}" id="input_search" type="text" class="form-control"
             placeholder="Idenficación a referir">
@@ -100,7 +116,7 @@
         </div>
       </form>
     </div>
-   
+
     <div class="col-md-12 order-md-2 mb-4">
       @php
       $mitad = 6;
@@ -110,15 +126,15 @@
       @if(isset($participante->padre_izq) || isset($participante->padre_der))
 
       @if(isset($participante->padre_izq))
-        @php
-          $padre = $participante->padre_izq;
-          $float = 'float-right';
-        @endphp
+      @php
+      $padre = $participante->padre_izq;
+      $float = 'float-right';
+      @endphp
       @else
-        @php
-          $padre = $participante->padre_der;
-          $float = 'float-left';
-        @endphp
+      @php
+      $padre = $participante->padre_der;
+      $float = 'float-left';
+      @endphp
       @endif
 
 
@@ -132,23 +148,25 @@
             </button>
           </p>
           <div class="collapse {{$float}}" id="collapseExample">
-            
-              <strong class=" ">{{$padre->name}}</strong>
-              <br>
-              <img style="width: 50px;"
-                src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-                alt="">
-              <br>
-              
-              <span class="">{{$padre->identificacion}}</span>
-            
+
+            <strong class=" ">{{$padre->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+
+            <a href="/participante_search?identificacion={{$padre->identificacion}}"><span
+                class="">{{$padre->identificacion}}</span></a>
+
+
           </div>
 
         </div>
       </div>
       @endif
 
-     
+
 
 
       <div class="row  justify-content-center">
@@ -175,7 +193,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+              class="">{{$participante->izq->identificacion}}</span></a>
 
 
           @else
@@ -198,7 +217,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+              class="">{{$participante->der->identificacion}}</span></a>
 
 
 
@@ -237,7 +257,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+              class="">{{$participante->izq->identificacion}}</span></a>
 
 
           @else
@@ -260,7 +281,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+              class="">{{$participante->der->identificacion}}</span></a>
 
 
           @else
@@ -284,7 +306,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-                    <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span class="">{{$participante->izq->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
+              class="">{{$participante->izq->identificacion}}</span></a>
 
 
           @else
@@ -307,7 +330,8 @@
             src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
             alt="">
           <br>
-          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span class="">{{$participante->der->identificacion}}</span></a>
+          <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+              class="">{{$participante->der->identificacion}}</span></a>
 
 
           @else
@@ -320,9 +344,202 @@
           <span class=""># identificacion libre</span>
           @endif
         </div>
+        
+       
+        <div class="row espacio">
+
+
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+          <div class="col-md-2 text-center">
+
+            @if(isset($participante->der))
+            <strong class=" ">{{$participante->der->name}}</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
+                class="">{{$participante->der->identificacion}}</span></a>
+
+
+            @else
+            <strong class=" ">Libre</strong>
+            <br>
+            <img style="width: 50px;"
+              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              alt="">
+            <br>
+            <span class=""># identificacion libre</span>
+            @endif
+          </div>
+        </div>
+
+
+
       </div>
 
-     
+
 
     </div>
   </div>
@@ -426,6 +643,18 @@
 
 
   $(document).ready(function () {
+
+    $('#editar_date').on('click', function (e) {
+      e.preventDefault();
+      var url = $(this).attr('href');
+      var id = $('#id_participante').val();
+      var fecha = $('#new_date').val();
+
+      $.post(url, { "_token": "{{ csrf_token() }}", 'fecha_ingreso': fecha, 'id': id }).done(function () {
+        location.reload();
+      })
+
+    })
 
   })
 </script>

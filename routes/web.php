@@ -25,6 +25,8 @@ Route::post('/participante_crear', 'HomeController@postParticipantesCreate')->na
 Route::get('/participante_search', 'HomeController@participante_search')->name('participante_search');
 Route::get('/post_search_participante', 'HomeController@post_search_participante')->name('post_search_participante');
 Route::post('/post_referir_participante', 'HomeController@post_referir_participante')->name('post_referir_participante');
+Route::post('/participante_update_date', 'HomeController@participante_update_date')->name('participante_update_date');
+
 
 
 
