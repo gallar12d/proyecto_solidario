@@ -152,7 +152,7 @@
             <strong class=" ">{{$padre->name}}</strong>
             <br>
             <img style="width: 50px;"
-              src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
+              src="{{url('/img/user.png')}}"
               alt="">
             <br>
 
@@ -175,8 +175,8 @@
           <strong class=" ">{{$participante->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class="">{{$participante->identificacion}}</span>
 
@@ -190,8 +190,8 @@
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
@@ -201,8 +201,8 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -214,8 +214,8 @@
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
@@ -226,8 +226,8 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -254,8 +254,8 @@
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
@@ -265,8 +265,8 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -278,8 +278,8 @@
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
@@ -289,8 +289,8 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -303,8 +303,8 @@
           <strong class=" ">{{$participante->izq->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->izq->identificacion}}"><span
               class="">{{$participante->izq->identificacion}}</span></a>
@@ -314,8 +314,8 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
@@ -327,8 +327,8 @@
           <strong class=" ">{{$participante->der->name}}</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <a href="/participante_search?identificacion={{$participante->der->identificacion}}"><span
               class="">{{$participante->der->identificacion}}</span></a>
@@ -338,14 +338,17 @@
           <strong class=" ">Libre</strong>
           <br>
           <img style="width: 50px;"
-            src="https://toppng.com/uploads/preview/user-font-awesome-nuevo-usuario-icono-11563566658mjtfvilgcs.png"
-            alt="">
+              src="{{url('/img/user.png')}}"
+              alt="">
           <br>
           <span class=""># identificacion libre</span>
           @endif
         </div>
         
        
+        @php
+        
+        @endphp
         <div class="row espacio">
 
 
