@@ -104,7 +104,7 @@
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
-              <h6 class="my-0">Telefono 1</h6>
+              <h6 class="my-0">Correo electrónico</h6>
               <small class="text-muted">{{$participante->email}}</small>
             </div>
 
@@ -337,7 +337,7 @@
         <div class="col-md-3 text-center">
           @if(isset($participante->izq))
           @php
-          $p3 = $participante->der;
+          $p3 = $participante->izq;
 
           @endphp
           <strong class=" ">{{$participante->izq->name}}</strong>

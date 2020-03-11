@@ -37,7 +37,7 @@ class HomeController extends Controller
         $id = $request->id;
         $participante = \App\Participante::find($id);
         $participante->fecha_ingreso = $request->fecha_ingreso;
-        $suma = date('Y-m-d', strtotime($request->fecha_ingreso. ' + 8 days'));
+        $suma = date('Y-m-d', strtotime($request->fecha_ingreso. ' + 21 days'));
         $participante->fecha_pago = $suma; 
         $participante->save();
 
@@ -59,7 +59,7 @@ class HomeController extends Controller
             $participante = \App\Participante::find($id);
             $participante->name = trim(strtoupper($participante->name));
             $participante->fecha_ingreso = date('Y-m-d');
-            $suma = date('Y-m-d', strtotime(date('Y-m-d'). ' + 8 days'));
+            $suma = date('Y-m-d', strtotime(date('Y-m-d'). ' + 21 days'));
             $participante->fecha_pago = $suma; 
             $participante->save();
             return redirect()->route('participantes_create');
