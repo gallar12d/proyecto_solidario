@@ -10,7 +10,7 @@ class Participante extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
 
-    protected $fillable = ['name', 'email', 'telefono1', 'telefono2', 'direccion', 'identificacion'];
+    protected $fillable = ['name', 'email', 'telefono1', 'telefono2', 'direccion', 'identificacion', 'fecha_ingreso'];
 
     public function izq()
     {
