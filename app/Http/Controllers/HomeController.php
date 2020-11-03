@@ -43,6 +43,27 @@ class HomeController extends Controller
 
     }
 
+    public function participante_update(Request $request){
+       
+        
+        \App\Participante::find($request->id)->update($request->all());
+
+        $suma = date('Y-m-d', strtotime($request->fecha_ingreso. ' + 21 days'));
+            
+        $p = \App\Participante::find($request->id);
+        $p->fecha_pago = $suma;
+        $p->name = trim(strtoupper( $p->name));
+        $p->save();
+
+
+        return redirect('/participante_search?identificacion='.$p->identificacion);
+
+
+        
+       
+        
+    }
+
     public function postParticipantesCreate(Request $request){
 
         // $flights = \App\Participante::all();

@@ -17,7 +17,7 @@
           </div>
           <!--end of col-->
           <div class="col-auto">
-            <button  class="btn btn-lg btn-success" type="submit">Buscar</button>
+            <button class="btn btn-lg btn-success" type="submit">Buscar</button>
           </div>
           <!--end of col-->
         </div>
@@ -35,12 +35,13 @@
           </div>
           <!--end of col-->
           <div class="col">
-            <input id="nombres" name="nombres" class="form-control form-control-lg form-control-borderless" type="search"
-              placeholder="Buscar por nombres">
+            <input id="nombres" name="nombres" class="form-control form-control-lg form-control-borderless"
+              type="search" placeholder="Buscar por nombres">
           </div>
           <!--end of col-->
           <div class="col-auto">
-            <button id = "search_name" data_url="{{url('/participante_search_name')}}" class="btn btn-lg btn-success" type="button">Buscar</button>
+            <button id="search_name" data_url="{{url('/participante_search_name')}}" class="btn btn-lg btn-success"
+              type="button">Buscar</button>
           </div>
           <!--end of col-->
         </div>
@@ -59,10 +60,10 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
-        
+
       </div>
     </div>
   </div>
@@ -78,76 +79,92 @@
         <span class="text-muted">Informacíon del participante</span>
 
       </h4>
-      <div class="row">
-        <ul class="list-group col-md-6 mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Nombre</h6>
-              <small class="text-muted">{{$participante->name}}</small>
-              <input type="hidden" value="{{$participante->id}}" id="id_participante">
-            </div>
+      <form autocomplete="off" action="{{url('/participante_update')}}" method="post">
+        @csrf
+        <input name="id" type="hidden" value="{{$participante->id}}" id="id_participante">
 
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Número de identificación</h6>
-              <small id="identificacion_participante" class="text-muted">{{$participante->identificacion}}</small>
-            </div>
+        <div class="row">
 
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Telefono 1</h6>
-              <small class="text-muted">{{$participante->telefono1}}</small>
-            </div>
+          <ul class="list-group col-md-6 mb-3">
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Nombre</h6>
+                <input class="form-control" type="text" name="name" value="{{$participante->name}}">
+              </div>
 
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Correo electrónico</h6>
-              <small class="text-muted">{{$participante->email}}</small>
-            </div>
+            </li>
+            <li class="list-group-item justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Número de identificación</h6>
+                <input disabled class="form-control" type="text"  value="{{$participante->identificacion}}">
+              </div>
 
-          </li>
+            </li>
+            <li class="list-group-item justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Telefono 1</h6>
+                <input class="form-control" type="text" name="telefono1" value="{{$participante->telefono1}}">
 
-        </ul>
-        <ul class="list-group col-md-6 mb-3">
+              </div>
 
+            </li>
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Correo electrónico</h6>
+                <input class="form-control" type="text" name="email" value="{{$participante->email}}">
 
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Telefono 2</h6>
-              <small class="text-muted">{{$participante->telefono2}}</small>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Dirección</h6>
-              <small class="text-muted">{{$participante->direccion}}</small>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Fecha de creación</h6>
-              <input id="new_date" type="date" value="{{$participante->fecha_ingreso}}">
-              <a id="editar_date" href="{{url('participante_update_date')}}">Modificar</a>
-              <small class="text-muted">{{$participante->fecha_ingreso}}</small>
-            </div>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Fecha de pago</h6>
-              <small class="text-muted">{{$participante->fecha_pago}}</small>
-            </div>
-          </li>
-        </ul>
+                <small class="text-muted">{{$participante->email}}</small>
+              </div>
 
-      </div>
+            </li>
+
+          </ul>
+          <ul class="list-group col-md-6 mb-3">
 
 
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Telefono 2</h6>
+                <input class="form-control" type="text" name="telefono2" value="{{$participante->telefono2}}">
 
+              </div>
+            </li>
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Dirección</h6>
+                <input class="form-control" type="text" name="direccion" value="{{$participante->direccion}}">
+
+              </div>
+            </li>
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Fecha de ingreso</h6>
+                <input class="form-control" name="fecha_ingreso" id="new_date" type="date"
+                  value="{{$participante->fecha_ingreso}}">
+
+              </div>
+            </li>
+            <li class="list-group-item  justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Fecha de pago</h6>
+                <input class="form-control" disabled name="fecha_pago" id="new_date" type="date"
+                  value="{{$participante->fecha_pago}}">
+
+
+
+              </div>
+            </li>
+          </ul>
+
+
+          <button type="submit" class="btn btn-primary float-right col-md-3">Actualizar datos</button>
+        </div>
+        
+      </form>
+
+      <hr>
       <form autocomplete="off" class="card p-2">
-        <div class="input-group">
+        <div class="input-group col-md-4">
           <input data_url="{{url('/post_search_participante')}}" id="input_search" type="text" class="form-control"
             placeholder="Idenficación a referir">
           <div class="input-group-append">
@@ -156,6 +173,7 @@
         </div>
       </form>
     </div>
+    <hr>
 
     <div class="col-md-12 order-md-2 mb-4">
       @php
@@ -729,13 +747,13 @@
       var valor = $('#nombres').val();
 
       $.get(url, { "_token": "{{ csrf_token() }}", 'valor': valor }).done(function (data) {
-        
+
         //location.reload();
-        if(data.participantes.length){
+        if (data.participantes.length) {
           text = '<div class="row">'
-          $.each(data.participantes, function(k,v){
-            text = text + '<div class="col-md-6">' + v.name + '->'+v.identificacion+'</div>';
-            text = text + '<div class="col-md-6"><a href="/participante_search?identificacion='+v.identificacion+'">Mostrar</a></div>';
+          $.each(data.participantes, function (k, v) {
+            text = text + '<div class="col-md-6">' + v.name + '->' + v.identificacion + '</div>';
+            text = text + '<div class="col-md-6"><a href="/participante_search?identificacion=' + v.identificacion + '">Mostrar</a></div>';
 
           })
           console.log(text)
@@ -747,7 +765,7 @@
 
     })
 
-    
+
 
   })
 </script>
